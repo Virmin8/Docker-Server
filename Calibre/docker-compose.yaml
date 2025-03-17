@@ -33,6 +33,6 @@ services:
 
 networks:
   traefik_default:
-    external: true
+    external: flase
 
 
