@@ -18,7 +18,7 @@ services:
       - "traefik.http.routers.calibre.rule=Host(`calibre.virmin8.uk`)"
       - "traefik.http.routers.calibre.tls=true"
       - "traefik.http.services.calibre.loadbalancer.server.port=8080"
-      #- "traefik.http.routers.calibre.middlewares=auth@file"
+      - "traefik.http.routers.calibre.middlewares=auth@file"
     volumes:
       - /srv/config/Calibre/config:/config
       - /srv/mergerfs/Books/uploads:/uploads
