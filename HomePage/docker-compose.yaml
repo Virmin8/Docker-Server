@@ -12,16 +12,16 @@ services:
       - /srv/config/HomePage/config:/app/config
       - /var/run/docker.sock:/var/run/docker.sock 
       - /srv/dev-disk-by-uuid-8df4876f-16a1-463d-9377-81a3e96bce45:/HDD/AnimeMovies
-      - /srv/dev-disk-by-id-ata-WDC_WUH721816ALE6L0_2BHU7YDN:/HDD/MoviesSeries
+      - /srv/dev-disk-by-uuid-49c13bd6-d6eb-4d54-b023-8b27d14e1d1a:/HDD/MoviesSeries
       - /srv/dev-disk-by-uuid-d7f79321-31e5-4840-a1e8-d1ff81b19b93:/HDD/Images3
-      - /srv/dev-disk-by-uuid-20a1d056-3e77-4d2d-8ab9-b6b0152ac2f2:/HDD/Series2
+      - /srv/dev-disk-by-uuid-8f17014e-f21e-4922-9434-ca8a093477f5:/HDD/Series2
       - /srv/dev-disk-by-uuid-da87d396-08bc-4d38-bc7a-6629c28cf757:/HDD/Images4
       - /srv/dev-disk-by-uuid-a65c6f44-723a-4a4e-b9ed-6b6974884828:/HDD/Series4
-      - /srv/dev-disk-by-uuid-76c205a0-6ea5-47ec-a8b2-fcd24bec9e1a:/HDD/Series3
+      - /srv/dev-disk-by-uuid-20a1d056-3e77-4d2d-8ab9-b6b0152ac2f2:/HDD/Series3
       - /srv/dev-disk-by-uuid-bb50a19f-1bd1-41f1-b502-0a74b3b074fd:/HDD/Images2
       - /srv/dev-disk-by-uuid-818a1087-cf63-4070-bcf6-694aabeb492a:/HDD/Images
       - /srv/dev-disk-by-uuid-7be824bb-cc3f-44bb-97db-e376e829f2db:/HDD/AnimeBooks
-      - /srv/dev-disk-by-uuid-8f17014e-f21e-4922-9434-ca8a093477f5:/HDD/Series
+      - /srv/dev-disk-by-uuid-5d8876a5-8032-45ff-9766-cf5bc04abd30:/HDD/Series
     restart: unless-stopped
     networks:
       - traefik_default
