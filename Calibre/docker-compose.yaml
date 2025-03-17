@@ -1,0 +1,36 @@
+services:
+  calibre:
+    image: lscr.io/linuxserver/calibre:latest
+    container_name: Calibre
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [compute,video,graphics,utility]
+    environment:
+      - PUID=1000
+      - PGID=1000
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.calibre.entrypoints=web, websecure"
+      - "traefik.http.routers.calibre.rule=Host(`calibre.virmin8.uk`)"
+      - "traefik.http.routers.calibre.tls=true"
+      - "traefik.http.services.calibre.loadbalancer.server.port=8080"
+      #- "traefik.http.routers.calibre.middlewares=auth@file"
+    volumes:
+      - /srv/config/Calibre/config:/config
+      - /srv/mergerfs/Books/uploads:/uploads
+      - /srv/mergerfs/Books:/media/Books
+
+
+    restart: unless-stopped
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true
+
+
