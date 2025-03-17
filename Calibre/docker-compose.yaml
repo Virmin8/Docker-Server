@@ -1,6 +1,6 @@
 services:
   calibre:
-    image: lscr.io/linuxserver/calibre:latest
+    image: lscr.io/linuxserver/calibre:v4
     container_name: Calibre
     deploy:
       resources:
@@ -28,6 +28,8 @@ services:
     restart: unless-stopped
     networks:
       - traefik_default
+    runtime: nvidia
+
 
 networks:
   traefik_default:
