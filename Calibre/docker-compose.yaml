@@ -1,14 +1,7 @@
 services:
   calibre:
-    image: lscr.io/linuxserver/calibre:v4
+    image: lscr.io/linuxserver/calibre:latest
     container_name: Calibre
-    deploy:
-      resources:
-        reservations:
-          devices:
-            - driver: nvidia
-              count: 1
-              capabilities: [compute,video,graphics,utility]
     environment:
       - PUID=1000
       - PGID=1000
@@ -33,6 +26,6 @@ services:
 
 networks:
   traefik_default:
-    external: flase
+    external: true
 
 
