@@ -1,0 +1,26 @@
+services:
+  server:
+    image: docker.gitea.com/gitea:latest
+    container_name: gitea
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.gitea.entrypoints=web, websecure"
+      - "traefik.http.routers.gitea.rule=Host(`gitea.virmin8.uk`)"
+      - "traefik.http.routers.gitea.tls=true"
+      - "traefik.http.services.gitea.loadbalancer.server.port=3000"
+      #- "traefik.http.routers.gitea.middlewares=auth@file"
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: always
+    volumes:
+      - /srv/config/Gitea/Data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true

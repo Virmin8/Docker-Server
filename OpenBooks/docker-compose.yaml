@@ -1,0 +1,22 @@
+services:
+  openbooks:
+    container_name: OpenBooks
+    image: evanbuss/openbooks:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.openbooks.entrypoints=web, websecure"
+      - "traefik.http.routers.openbooks.rule=Host(`openbooks.virmin8.uk`)"
+      - "traefik.http.routers.openbooks.tls=true"
+      #- "traefik.http.routers.openbooks.middlewares=auth@file"
+      
+    volumes:
+      - /srv/mergerfs/Books/uploads:/books
+      - /srv/config/OpenBooks:/config
+    command: --name WhatAmIDoingHere --persist
+    restart: unless-stopped
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true

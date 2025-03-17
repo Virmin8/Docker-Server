@@ -1,0 +1,22 @@
+services:
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: Plex
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.overseerr.entrypoints=web, websecure"
+      - "traefik.http.routers.overseerr.rule=Host(`overseerr.virmin8.uk`)"
+      - "traefik.http.routers.overseerr.tls=true"
+
+    environment:
+      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
+      - NVIDIA_VISIBLE_DEVICES=all
+      - VERSION=latest
+
+    volumes:
+      - /srv/mergerfs:/media
+      - /srv/dev-disk-by-id-ata-WDC_WUH721816ALE6L0_2BHU7YDN/transcode:/transcode
+      - /srv/config/Plex:/config
+    restart: unless-stopped
+    network_mode: host
+     

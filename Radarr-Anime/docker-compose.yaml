@@ -1,0 +1,26 @@
+services:
+  radarr-anime:
+    container_name: Radarr-Anime
+    image: ghcr.io/hotio/radarr:nightly
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.radarr-anime.entrypoints=web, websecure"
+      - "traefik.http.routers.radarr-anime.rule=Host(`radarr-anime.virmin8.uk`)"
+      - "traefik.http.routers.radarr-anime.tls=true"
+      #- "traefik.http.routers.radarr-anime.middlewares=auth@file"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+
+    volumes:
+      - /srv/mergerfs:/media
+      - /srv/remotemount/Data:/media/Download
+      - /srv/config/Radarr-Anime:/config
+    restart: unless-stopped
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true

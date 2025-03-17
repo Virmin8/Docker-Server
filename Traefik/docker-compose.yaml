@@ -1,0 +1,38 @@
+services:
+  traefik:
+    image: docker.io/library/traefik:latest
+    container_name: traefik
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+      - 2022:2022
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.traefik-secure.entrypoints=web, websecure"
+      - "traefik.http.routers.traefik-secure.rule=Host(`traefik.virmin8.uk`)"
+      - "traefik.http.routers.traefik-secure.service=api@internal"
+      - "traefik.http.routers.traefik-secure.tls=true"
+      - "traefik.http.routers.traefik-secure.tls.certresolver=cloudflare"
+      - "traefik.http.routers.traefik-secure.tls.domains[0].main=virmin8.uk"
+      - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.virmin8.uk"
+      #- "traefik.http.routers.traefik-secure.middlewares=auth@file"
+     
+      
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /srv/config/Traefik/config/traefik.yaml:/etc/traefik/traefik.yaml:ro
+      - /srv/config/Traefik/config/conf/:/etc/traefik/conf/
+      - /srv/config/Traefik/config/certs/:/etc/traefik/certs/
+   
+    environment:
+      - CLOUDFLARE_EMAIL=michael.antony.williams@outlook.com
+      - CLOUDFLARE_API_KEY=0ccd7dd27c651a9dc489f8853b2dcc397db8e
+  
+    restart: unless-stopped
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true

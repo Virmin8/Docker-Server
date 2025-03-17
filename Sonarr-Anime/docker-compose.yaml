@@ -1,0 +1,25 @@
+services:
+  Sonarr-Anime:
+    container_name: 	Sonarr-Anime
+    image: ghcr.io/hotio/sonarr:nightly
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sonarr-anime.entrypoints=web, websecure"
+      - "traefik.http.routers.sonarr-anime.rule=Host(`sonarr-anime.virmin8.uk`)"
+      - "traefik.http.routers.sonarr-anime.tls=true"
+      #- "traefik.http.routers.sonarr-anime.middlewares=auth@file"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+    volumes:
+      - /srv/mergerfs:/media
+      - /srv/remotemount/Data:/media/Download
+      - /srv/config/Sonarr-Anime:/config
+    restart: unless-stopped
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true

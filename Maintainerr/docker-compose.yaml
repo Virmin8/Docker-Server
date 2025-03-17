@@ -1,0 +1,25 @@
+services:
+  sonarr:
+    container_name: Maintainerr
+    image: ghcr.io/jorenn92/maintainerr:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.maintainerr.entrypoints=web, websecure"
+      - "traefik.http.routers.maintainerr.rule=Host(`maintainerr.virmin8.uk`)"
+      - "traefik.http.routers.maintainerr.tls=true"
+     # - "traefik.http.routers.maintainerr.middlewares=auth@file"
+      
+      
+    environment:
+      - PUID=1000
+      - PGID=1000
+   
+    volumes:
+      - /srv/config/Maintainerr:/config
+    restart: unless-stopped
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true

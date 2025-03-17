@@ -1,0 +1,22 @@
+services:
+  shinkro:
+    container_name: Shinkro
+    image: ghcr.io/varoop/shinkro:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.shinkro.entrypoints=web, websecure"
+      - "traefik.http.routers.shinkro.rule=Host(`shinkro.virmin8.uk`)"
+      - "traefik.http.routers.shinkro.tls=true"
+    environment:
+      - SHINKRO_USERNAME=shinkro
+      - SHINKRO_PASSWORD=shinkro
+      - PLEX_USERNAME=shinkro
+      - ANIME_LIBRARIES=Anime-Series,Anime-Movies
+    volumes:
+      - /srv/config/Shinkro:/config
+    restart: unless-stopped
+    networks:
+      - traefik_default
+networks:
+  traefik_default:
+    external: true

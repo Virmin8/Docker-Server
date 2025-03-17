@@ -1,0 +1,23 @@
+services:
+  prowlarr:
+    container_name: Prowlarr
+    image: ghcr.io/hotio/prowlarr:nightly
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.prowlarr.entrypoints=web, websecure"
+      - "traefik.http.routers.prowlarr.rule=Host(`prowlarr.virmin8.uk`)"
+      - "traefik.http.routers.prowlarr.tls=true"
+      #- "traefik.http.routers.prowlarr.middlewares=auth@file"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+    volumes:
+      - /srv/config/Prowlarr/:/config
+    restart: unless-stopped
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true

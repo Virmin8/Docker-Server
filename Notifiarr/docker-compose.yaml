@@ -1,0 +1,18 @@
+services:
+  notifiarr:
+    image: golift/notifiarr:latest
+    container_name: Notifiarr
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.notifiarr.entrypoints=web, websecure"
+      - "traefik.http.routers.notifiarr.rule=Host(`notifiarr.virmin8.uk`)"
+      - "traefik.http.routers.notifiarr.tls=true"
+    volumes:
+     - /srv/config/Notifiarr:/config 
+    restart: unless-stopped
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true

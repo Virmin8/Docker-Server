@@ -1,0 +1,20 @@
+services:
+  tautulli:
+    container_name: Tautulli
+    image: ghcr.io/tautulli/tautulli
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.tautulli.entrypoints=web, websecure"
+      - "traefik.http.routers.tautulli.rule=Host(`tautulli.virmin8.uk`)"
+      - "traefik.http.routers.tautulli.tls=true"
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /srv/config/Tautulli/config:/config
+    restart: unless-stopped
+    networks:
+      - traefik_default
+networks:
+  traefik_default:
+    external: true

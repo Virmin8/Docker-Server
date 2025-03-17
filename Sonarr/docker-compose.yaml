@@ -1,0 +1,27 @@
+services:
+  sonarr:
+    container_name: Sonarr
+    image: ghcr.io/hotio/sonarr:nightly
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sonarr.entrypoints=web, websecure"
+      - "traefik.http.routers.sonarr.rule=Host(`sonarr.virmin8.uk`)"
+      - "traefik.http.routers.sonarr.tls=true"
+      #- "traefik.http.routers.sonarr.middlewares=auth@file"
+      
+      
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+    volumes:
+      - /srv/mergerfs:/media
+      - /srv/remotemount/Data:/media/Download
+      - /srv/config/Sonarr:/config
+    restart: unless-stopped
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true

@@ -1,0 +1,21 @@
+services:
+  watchtower :
+    image: containrrr/watchtower:latest
+    container_name: Watchtower 
+    environment:
+    - TZ=Africa/Johannesburg
+    - WATCHTOWER_CLEANUP=true
+    - WATCHTOWER_HTTP_API_METRICS=true
+    - WATCHTOWER_HTTP_API_TOKEN=sdrtgsrmytfxmhtfxfhtm
+    - WATCHTOWER_INCLUDE_STOPPED=true
+    - WATCHTOWER_RUN_ONCE=false
+    - WATCHTOWER_SCHEDULE=0 0 4 * * *
+    volumes:
+     - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true

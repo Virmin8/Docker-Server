@@ -1,0 +1,45 @@
+services:
+  sftpgo:
+    container_name: SFTPGo
+    image: drakkan/sftpgo:edge-alpine
+
+    expose:
+      - "2022"
+      - "8888"
+
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.sftpgoui.entrypoints=web, websecure"
+      - "traefik.http.routers.sftpgoui.rule=Host(`filebrowser.virmin8.uk`)"
+      - "traefik.http.services.sftpgoui.loadBalancer.server.port=8888"
+      - "traefik.http.routers.sftpgoui.tls=true"
+
+      - "traefik.tcp.routers.sftpgosftp.entrypoints=sftpgo"
+      - "traefik.tcp.routers.sftpgosftp.rule=HostSNI(`*`)"
+      - "traefik.tcp.services.sftpgosftp.loadBalancer.server.port=2022"
+      - "traefik.tcp.services.sftpgosftp.loadbalancer.proxyprotocol.version=2"
+
+    environment:
+
+      - "SFTPGO_COMMON__PROXY_PROTOCOL=2"
+      - "SFTPGO_COMMON__PROXY_ALLOWED=0.0.0.0/0"
+      - "SFTPGO_SFTPD__BINDINGS__0__PORT=2022"
+      - "SFTPGO_SFTPD__BINDINGS__0__PROXY_ALLOWED=0.0.0.0/0"
+      - "SFTPGO_HTTPD__BINDINGS__0__PORT=8888"
+      - "SFTPGO_HTTPD__BINDINGS__0__PROXY_ALLOWED=0.0.0.0/0"
+
+      - PUID=1000
+      - PGID=1000
+
+    volumes:
+      - /srv/mergerfs:/srv/media
+      - /srv/config/SFTPGo/data:/srv/sftpgo/data
+      - /srv/config/SFTPGo/backups:/srv/sftpgo/backups
+      - /srv/config/SFTPGo/config:/var/lib/sftpgo	
+    restart: unless-stopped
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true

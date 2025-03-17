@@ -1,0 +1,24 @@
+services:
+  calibre-web:
+    image: lscr.io/linuxserver/calibre-web:latest
+    container_name: Calibre-Web
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.calibre-web.entrypoints=web, websecure"
+      - "traefik.http.routers.calibre-web.rule=Host(`calibre-web.virmin8.uk`)"
+      - "traefik.http.routers.calibre-web.tls=true"
+      #- "traefik.http.routers.calibre-web.middlewares=auth@file"
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /srv/config/Calibre-Web/config:/config
+      - /srv/mergerfs/Books:/media/books
+    environment:
+      - DOCKER_MODS=linuxserver/mods:universal-calibre
+    restart: unless-stopped
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true

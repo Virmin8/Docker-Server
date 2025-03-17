@@ -1,0 +1,27 @@
+services:
+  radarr:
+    container_name: Radarr
+    image: ghcr.io/hotio/radarr:nightly
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.radarr.entrypoints=web, websecure"
+      - "traefik.http.routers.radarr.rule=Host(`radarr.virmin8.uk`)"
+      - "traefik.http.routers.radarr.tls=true"
+      #- "traefik.http.routers.radarr.middlewares=auth@file"
+      
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+
+    volumes:
+      - /srv/mergerfs:/media
+      - /srv/remotemount/Data:/media/Download
+      - /srv/config/Radarr:/config
+    restart: unless-stopped
+    networks:
+      - traefik_default
+
+networks:
+  traefik_default:
+    external: true
