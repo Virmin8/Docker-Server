@@ -18,7 +18,7 @@ services:
       POSTGRES_USER: ${PG_USER:-authentik}
       POSTGRES_DB: ${PG_DB:-authentik}
     env_file:
-      - stack.env
+      - .stack.env
     
     networks:
       - traefik_default
@@ -38,7 +38,7 @@ services:
     volumes:
       - /srv/config/Authentik/config/redis:/data
     env_file:
-      - stack.env
+      - .stack.env
     networks:
       - traefik_default
 
@@ -62,7 +62,7 @@ services:
       - /srv/config/Authentik/config/media:/media
       - /srv/config/Authentik/config/custom-templates:/templates
     env_file:
-      - stack.env
+      - .stack.env
     ports:
       - "${COMPOSE_PORT_HTTP:-9000}:9000"
       - "${COMPOSE_PORT_HTTPS:-9443}:9443"
@@ -91,7 +91,7 @@ services:
     # (1000:1000 by default)
     user: root
     env_file:
-      - stack.env
+      - .stack.env
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /srv/config/Authentik/config/media:/media
