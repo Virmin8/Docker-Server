@@ -8,6 +8,8 @@ services:
       - "traefik.http.routers.homepage.rule=Host(`homepage.virmin8.uk`)"
       - "traefik.http.routers.homepage.tls=true"
       #- "traefik.http.routers.homepage.middlewares=auth@file"
+    environment:
+      - HOMEPAGE_ALLOWED_HOSTS=homepage.virmin8.uk
     volumes:
       - /srv/config/HomePage/config:/app/config
       - /var/run/docker.sock:/var/run/docker.sock 
