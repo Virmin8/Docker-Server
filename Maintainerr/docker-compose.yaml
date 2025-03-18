@@ -1,7 +1,7 @@
 services:
   sonarr:
     container_name: Maintainerr
-    image: jorenn92/maintainerr:develop
+    image: ghcr.io/jorenn92/maintainerr:main
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.maintainerr.entrypoints=web, websecure"
