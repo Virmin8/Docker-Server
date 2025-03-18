@@ -1,7 +1,7 @@
 services:
   traefik:
     image: docker.io/library/traefik:latest
-    container_name: traefik
+    container_name: Traefik
     ports:
       - 80:80
       - 443:443

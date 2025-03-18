@@ -1,7 +1,7 @@
 services:
   server:
     image: docker.gitea.com/gitea:latest
-    container_name: gitea
+    container_name: Gitea
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.gitea.entrypoints=web, websecure"
