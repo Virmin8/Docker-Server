@@ -16,7 +16,7 @@ services:
       - "traefik.http.routers.traefik-secure.tls.certresolver=cloudflare"
       - "traefik.http.routers.traefik-secure.tls.domains[0].main=virmin8.uk"
       - "traefik.http.routers.traefik-secure.tls.domains[0].sans=*.virmin8.uk"
-      #- "traefik.http.routers.traefik-secure.middlewares=auth@file"
+      - "traefik.http.routers.traefik-secure.middlewares=auth@file"
      
       
     volumes:

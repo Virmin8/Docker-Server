@@ -7,7 +7,7 @@ services:
       - "traefik.http.routers.sonarr-anime.entrypoints=web, websecure"
       - "traefik.http.routers.sonarr-anime.rule=Host(`sonarr-anime.virmin8.uk`)"
       - "traefik.http.routers.sonarr-anime.tls=true"
-      #- "traefik.http.routers.sonarr-anime.middlewares=auth@file"
+      - "traefik.http.routers.sonarr-anime.middlewares=auth@file"
     environment:
       - PUID=1000
       - PGID=1000

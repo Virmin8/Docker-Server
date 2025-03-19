@@ -8,7 +8,7 @@ services:
       - "traefik.http.routers.gitea.rule=Host(`gitea.virmin8.uk`)"
       - "traefik.http.routers.gitea.tls=true"
       - "traefik.http.services.gitea.loadbalancer.server.port=3000"
-      #- "traefik.http.routers.gitea.middlewares=auth@file"
+      - "traefik.http.routers.gitea.middlewares=auth@file"
     environment:
       - USER_UID=1000
       - USER_GID=1000

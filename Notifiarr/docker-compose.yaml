@@ -7,8 +7,11 @@ services:
       - "traefik.http.routers.notifiarr.entrypoints=web, websecure"
       - "traefik.http.routers.notifiarr.rule=Host(`notifiarr.virmin8.uk`)"
       - "traefik.http.routers.notifiarr.tls=true"
+      - "traefik.http.routers.notifiarr.middlewares=auth@file"
     volumes:
      - /srv/config/Notifiarr:/config 
+    environment:
+     - DN_UPSTREAMS_0=172.18.0.0/24
     restart: unless-stopped
     networks:
       - traefik_default

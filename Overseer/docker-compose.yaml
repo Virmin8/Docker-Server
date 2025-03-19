@@ -7,7 +7,7 @@ services:
       - "traefik.http.routers.overseerr.entrypoints=web, websecure"
       - "traefik.http.routers.overseerr.rule=Host(`overseerr.virmin8.uk`)"
       - "traefik.http.routers.overseerr.tls=true"
-    #  - "traefik.http.routers.overseerr.middlewares=auth@file"
+
     environment:
       - PUID=1000
       - PGID=1000

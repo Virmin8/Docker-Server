@@ -7,7 +7,7 @@ services:
       - "traefik.http.routers.maintainerr.entrypoints=web, websecure"
       - "traefik.http.routers.maintainerr.rule=Host(`maintainerr.virmin8.uk`)"
       - "traefik.http.routers.maintainerr.tls=true"
-     # - "traefik.http.routers.maintainerr.middlewares=auth@file"
+      - "traefik.http.routers.maintainerr.middlewares=auth@file"
       
     user: 1000:1000
     volumes:

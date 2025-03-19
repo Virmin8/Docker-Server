@@ -7,6 +7,7 @@ services:
       - "traefik.http.routers.shinkro.entrypoints=web, websecure"
       - "traefik.http.routers.shinkro.rule=Host(`shinkro.virmin8.uk`)"
       - "traefik.http.routers.shinkro.tls=true"
+      - "traefik.http.routers.shinkro.middlewares=auth@file"
     environment:
       - SHINKRO_USERNAME=shinkro
       - SHINKRO_PASSWORD=shinkro

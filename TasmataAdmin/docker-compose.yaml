@@ -5,9 +5,9 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.tasmoadmin.entrypoints=web, websecure"
-      - "traefik.http.routers.tasmoadmin.rule=Host(`TasmoAdmin.virmin8.uk`)"
+      - "traefik.http.routers.tasmoadmin.rule=Host(`tasmoadmin.virmin8.uk`)"
       - "traefik.http.routers.tasmoadmin.tls=true"
-      #- "traefik.http.routers.tasmoadmin.middlewares=auth@file
+      - "traefik.http.routers.tasmoadmin.middlewares=auth@file"
     volumes:
       - /srv/config/TasmataAdmin:/data
     restart: unless-stopped
