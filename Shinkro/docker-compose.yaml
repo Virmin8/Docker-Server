@@ -7,12 +7,11 @@ services:
       - "traefik.http.routers.shinkro.entrypoints=web, websecure"
       - "traefik.http.routers.shinkro.rule=Host(`shinkro.virmin8.uk`)"
       - "traefik.http.routers.shinkro.tls=true"
-      - "traefik.http.routers.shinkro.middlewares=auth@file"
     environment:
-      - SHINKRO_USERNAME=shinkro
-      - SHINKRO_PASSWORD=shinkro
-      - PLEX_USERNAME=shinkro
-      - ANIME_LIBRARIES=Anime-Series,Anime-Movies
+      - SHINKRO_USERNAME=admin
+      - SHINKRO_PASSWORD=Firesailma2010
+      - PLEX_USERNAME=Virmin8
+      - ANIME_LIBRARIES=Anime-Shows,Anime-Movies
       - PUID=1000
       - PGID=1000
     volumes:
