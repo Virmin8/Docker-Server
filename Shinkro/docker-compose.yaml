@@ -13,6 +13,8 @@ services:
       - SHINKRO_PASSWORD=shinkro
       - PLEX_USERNAME=shinkro
       - ANIME_LIBRARIES=Anime-Series,Anime-Movies
+      - PUID=1000
+      - PGID=1000
     volumes:
       - /srv/config/Shinkro:/config
     restart: unless-stopped
