@@ -9,9 +9,11 @@ services:
       - "traefik.http.routers.overseerr.tls=true"
 
     environment:
+      - PUID=1000
+      - PGID=1000
       - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
       - NVIDIA_VISIBLE_DEVICES=all
-      - VERSION=latest
+      - VERSION=plexpass
 
     volumes:
       - /srv/mergerfs:/media
@@ -19,4 +21,5 @@ services:
       - /srv/config/Plex:/config
     restart: unless-stopped
     network_mode: host
+    runtime: nvidia
      

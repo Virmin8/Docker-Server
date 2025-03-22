@@ -1,0 +1,14 @@
+---
+services:
+  ImdbUpdate:
+    image: mynttt/updatetool
+    container_name: ImdbUpdate
+    environment:
+      - USE_PLEX_SQLITE_BINARY_FOR_WRITE_ACCESS=true
+      - UNLOCK_FOR_NEW_TV_AGENT=7;9
+      - JVM_MAX_HEAP=1g
+      #- RUN_EVERY_N_HOURS=12
+    volumes:
+      - /srv/config/ImdbUpdate/config:/config
+      - /srv/config/Plex/Library/Application Support/Plex Media Server:/plexdata
+    restart: unless-stopped
