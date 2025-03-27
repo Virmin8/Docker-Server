@@ -26,9 +26,10 @@ services:
       - /srv/config/Traefik/config/certs/:/etc/traefik/certs/
    
     environment:
-      - CLOUDFLARE_EMAIL=michael.antony.williams@outlook.com
-      - CLOUDFLARE_API_KEY=0ccd7dd27c651a9dc489f8853b2dcc397db8e
-  
+      - CLOUDFLARE_EMAIL=${CLOUDFLARE_EMAIL}
+      - CLOUDFLARE_API_KEY=${CLOUDFLARE_API_KEY}
+    env_file:
+      - .env
     restart: unless-stopped
     networks:
       - traefik_default

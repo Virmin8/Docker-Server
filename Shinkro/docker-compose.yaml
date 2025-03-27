@@ -8,14 +8,16 @@ services:
       - "traefik.http.routers.shinkro.rule=Host(`shinkro.virmin8.uk`)"
       - "traefik.http.routers.shinkro.tls=true"
     environment:
-      - SHINKRO_USERNAME=admin
-      - SHINKRO_PASSWORD=Firesailma2010
-      - PLEX_USERNAME=Virmin8
+      - SHINKRO_USERNAME=${SHINKRO_USERNAME}
+      - SHINKRO_PASSWORD=${SHINKRO_PASSWORD}
+      - PLEX_USERNAME=${PLEX_USERNAME}
       - ANIME_LIBRARIES=Anime-Shows,Anime-Movies
       - PUID=1000
       - PGID=1000
     volumes:
       - /srv/config/Shinkro:/config
+    env_file:
+      - .env
     restart: unless-stopped
     networks:
       - traefik_default
