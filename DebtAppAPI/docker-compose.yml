@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  
+  web:
+    container_name: FastAPI
+    build: .
+    ports:
+     - "1234:80"
+    volumes:
+     - .:/app
+
