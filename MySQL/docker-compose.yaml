@@ -1,0 +1,21 @@
+services:
+
+  db:
+    image: mysql:8
+    container_name: MySQL
+    ports:
+      - 3306:3306
+    volumes:
+     - /srv/config/MySQL:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${ROOT_PASSWORD}
+      - MYSQL_DATABASE=mydatabase
+    env_file:
+      - .env
+    restart: unless-stopped
+
+
+
+
+
+    # (this is just an example, not intended to be a production configuration)
