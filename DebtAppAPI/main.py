@@ -5,7 +5,7 @@ import hashlib
 
 # Connect to the database
 mydb = mysql.connector.connect(
-    host="192.168.1.24",
+    host="sql.virmin8.uk",
     user="root",
     password="Firesailma2010",
     database="Services"
@@ -34,7 +34,7 @@ def select_services():
 
 @app.get("/services/{service_id}", status_code=status.HTTP_200_OK)
 def get_service_by_id(service_id: int):
-    select_query = "SELECT * FROM services WHERE id = %s"
+    select_query = "SELECT * FROM services WHERE Service_ID = %s"
     cursor.execute(select_query, (service_id,))
     result = cursor.fetchone()
     if result:
@@ -46,7 +46,7 @@ def get_service_by_id(service_id: int):
 def insert_service(user: DBServices):
 
     insert_query = """
-    INSERT INTO Services (Name,Monthly,Day,Month,Year,Cost,Currency) 
+    INSERT INTO services (Name,Monthly,Day,Month,Year,Cost,Currency) 
     VALUES (%s, %s, %s,%s, %s, %s, %s)
     """
     values = (user.name, user.monthly, user.day, user.month, user.year, user.cost, user.currency)
@@ -61,7 +61,7 @@ def insert_service(user: DBServices):
 
 @app.delete("/services/{service_id}", status_code=status.HTTP_200_OK)
 def delete_service(service_id: int):
-    delete_query = "DELETE FROM services WHERE id = %s"
+    delete_query = "DELETE FROM services WHERE Service_ID = %s"
     cursor.execute(delete_query, (service_id,))
     mydb.commit()
     if cursor.rowcount == 0:
