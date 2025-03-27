@@ -1,0 +1,7 @@
+services:
+  pasta:
+    image: cglatot/pasta
+    container_name: Pasta
+    ports:
+      - 8087:80 
+    restart: unless-stopped

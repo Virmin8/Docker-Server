@@ -1,0 +1,26 @@
+services:
+  unmanic:
+    container_name: Unmanic
+    image: josh5/unmanic:staging
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.unmanic.entrypoints=web, websecure"
+      - "traefik.http.routers.unmanic.rule=Host(`unmanic.virmin8.uk`)"
+      - "traefik.http.routers.unmanic.tls=true"
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - NVIDIA_DRIVER_CAPABILITIES=compute,video,utility
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - /srv/config/Unmanic/config:/config
+      - /srv/mergerfs:/library
+      - /srv/config/Unmanic/cache:/tmp/unmanic
+
+    networks:
+      - traefik_default
+    runtime: nvidia
+
+networks:
+  traefik_default:
+    external: true
