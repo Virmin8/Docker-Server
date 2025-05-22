@@ -7,6 +7,7 @@ services:
       - .env
     networks:
       - traefik_default
+    restart: always
 
 networks:
   traefik_default:
